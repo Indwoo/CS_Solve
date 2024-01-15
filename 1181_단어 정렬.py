@@ -1,11 +1,10 @@
-import sys
+n = int(input())
 
-N = int(sys.stdin.readline())
+words = [str(input()) for i in range(n)]
 
-str_list = [str(input()) for i in range(N)]
+words = list(set(words))
+words.sort()
+words.sort(key=len)
 
-str_list = list(set(str_list))
-str_list.sort(key=len)
-
-for i in str_list:
+for i in words:
     print(i)
