@@ -1,19 +1,14 @@
-n = int(input())
-
-# n개의 원반을 a -> c로 이동
-def Hanoi(n, a, b, c):
-    if n == 1:
-        print(a, c)
+def hanoi_tower(n, start, end) :
+    if n == 1 :
+        print(start, end)
         return
-
-    # 원반 n-1 b로 이동
-    Hanoi(n-1, a, c, b)
-    # 가장 큰 원반을 c 로 이동
-    print(a, c)
-    # b 에 있는 원반 n-1 개를 c로 이동
-    Hanoi(n-1, b, a, c)
-
-print(2 ** n - 1) # 이동 횟수
-if n <= 20: Hanoi(n, 1, 2, 3)
+       
+    hanoi_tower(n-1, start, 6-start-end) # 1단계
+    print(start, end) # 2단계
+    hanoi_tower(n-1, 6-start-end, end) # 3단계
+    
+n = int(input())
+print(2**n-1)
+hanoi_tower(n, 1, 3)
 
 #출처 : https://study-all-night.tistory.com/6
