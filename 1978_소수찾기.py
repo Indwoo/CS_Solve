@@ -1,7 +1,9 @@
 cnt = 0
 is_sosu = True
+
 N = int(input())
 j = list(map(int, input().split()))
+
 for i in range(N):
     if j[i]==1:
         continue
