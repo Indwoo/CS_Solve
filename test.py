@@ -1,6 +1,13 @@
-dfs_list=[]
+import sys
+from collections import deque
 
-for i in range(5):
-    x, y = map(int,input().split())
-    dfs_list.append([x, y])
-    print(dfs_list)
+N = int(sys.stdin.readline().strip())
+
+matrix = []
+
+for i in range(N):
+    matrix[0].append(0)
+    matrix.append(list(map(int, list(sys.stdin.readline().rstrip()))))
+    matrix[-1].append(0)
+
+print(matrix)
