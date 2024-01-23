@@ -2,17 +2,30 @@ from collections import deque
 import sys
 
 N, M = map(int, input().split())
+bfs_list = []
 
-bfs_list = [ [] for _ in range (N+2)]
-visited_list = [False] * (N+2)
-
-queue = deque(bfs_list)
-print(queue)
-
-queue.appendleft([0 for i in range (M+2)])
-queue.append([0 for i in range (M+2)])
 for i in range(N):
-    bfs_list.append(list(map(int, list(sys.stdin.readline().rstrip()))))
+    bfs_list.append(list(map(int, sys.stdin.readline().strip())))
+     
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
 
-print(queue)
+def bfs(x, y):
+    queue= deque()
+    queue.append((x,y))
+    while queue:
+        x,y = queue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if nx<0 or nx>=N or ny<0 or ny>=M:
+                continue
+            if bfs_list[nx][ny] == 0:
+                continue
+            if bfs_list[nx][ny] == 1:
+                bfs_list[nx][ny] = bfs_list[x][y] + 1
+                queue.append((nx, ny))
+                
+    return bfs_list[N-1][M-1]
 
+print(bfs(0,0))
