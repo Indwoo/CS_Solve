@@ -3,37 +3,32 @@ from collections import deque
 
 N, M = map(int, sys.stdin.readline().split())
 height = [[] for _ in range(N+1)]
+cost = [[] for _ in range(N+1)]
+going_to = [0] * (N+1)
 
 for i in range(M):
-    A, B = map(int, sys.stdin.readline().split())
-    height[A].append([B])
-    
-def topological_sort(graph):   
+    smaller, taller = map(int,sys.stdin.readline().split())
+    height[smaller].append(taller)
+    going_to[taller] += 1
 
-    in_degree = {node: 0 for node in graph}
-
-    for node in graph:
-        for neighbor in graph[node]:
-            in_degree[neighbor] += 1
-
-    queue = deque(node for node in in_degree if in_degree[node] == 0)
-
-    sorted_order = []
+def topological_sort(graph):
+    in_degree = []
+    queue = deque()
+    for i in range(1,N+1):
+        if not going_to[i]:
+            queue.append(i)
 
     while queue:
-        node = queue.popleft()  
-        sorted_order.append(node)
+        x = queue.popleft()
+        in_degree.append(x)
 
-        for neighbor in graph[node]:
-            in_degree[neighbor] -= 1
+        for i in graph[x]:
+            going_to[i] -= 1
+            if going_to[i] == 0:
+                queue.append(i)
 
-            if in_degree[neighbor] == 0:
-                queue.append(neighbor)
-
-    if len(sorted_order) != len(graph):
-        return False
-
-    return sorted_order
+    for i in in_degree:
+        print(i, end=' ')
 
 # 위상 정렬 결과 출력
-print(topological_sort(height))
+topological_sort(height)

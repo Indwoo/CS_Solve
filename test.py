@@ -1,13 +1,15 @@
 import sys
 from collections import deque
 
-N = int(sys.stdin.readline().strip())
+N, M = map(int, sys.stdin.readline().split())
 
-matrix = []
+matrix = {}
 
 for i in range(N):
-    matrix[0].append(0)
-    matrix.append(list(map(int, list(sys.stdin.readline().rstrip()))))
-    matrix[-1].append(0)
-
+    key, val = sys.stdin.readline().split()
+    if key in matrix:
+        matrix[key].append(val)
+    else:
+        matrix[key] = [val]
+    
 print(matrix)
