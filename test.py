@@ -1,32 +1,39 @@
 import sys
-import heapq 
-
+sys.setrecursionlimit(10**5)
 input = sys.stdin.readline
+from collections import deque
 
 n = int(input())
-m = int(input())
-graph = [[] for _ in range(n+1)]
+g = [list(map(int, input().rstrip())) for _ in range(n)]
+size = []
 
-for _ in range(m):
-    a, b, cost = map(int, input().split())
-    graph[a].append([b, cost])
-        
-start, end = map(int, input().split())
-costs = [1e9 for _ in range(n+1)]
-heap = []
-costs[start] = 0
-heapq.heappush(heap, [0, start])
-    
-while heap:
-    cur_cost, cur_v = heapq.heappop(heap)
-    if costs[cur_v] < cur_cost:
-        continue
-    for next_v, next_cost in graph[cur_v]:
-        sum_cost = cur_cost + next_cost
-        if sum_cost >= costs[next_v]:
-            continue
-        
-        costs[next_v] = sum_cost
-        heapq.heappush(heap, [sum_cost, next_v])
-        
-print(costs[end])
+def init(n, g):
+    m = len(g[0])
+    dis = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    def bfs(x, y):
+        q = deque([(x, y)])
+        count = 0
+        while q:
+            x, y = q.popleft()
+            if g[x][y] == 1:
+                count += 1
+                g[x][y] = 0
+                for dx, dy in dis:
+                    nx, ny = x + dx, y + dy
+                    if 0 <= nx < n and 0 <= ny < m:
+                        q.append((nx, ny))
+        return count
+
+    count = 0
+    for i in range(n):
+        for j in range(m):
+            if g[i][j] == 1:
+                count += 1
+                size.append(bfs(i, j))
+    size.sort()
+    return count, size
+
+result = init(n, g)
+print(result[0])
+for size in result[1]:
+    print(size)
