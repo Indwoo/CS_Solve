@@ -1,18 +1,22 @@
 import sys
 
-def fib(n):
-    memo = [1,1]
-    for i in range(2,n):
-        memo.append(0)
+arr = []
+
+K = int(sys.stdin.readline())
+newbie=[]
+cnt=0
+
+for j in range(K):
+    arr.append(list((map(int, sys.stdin.readline().split()))))
         
-    return fib_action(memo, n-1)
+arr.sort(key = lambda x:(x[1],x[0]))
+print(arr)
 
-def fib_action(memo, n):
-    if memo[n] > 0: #수행한 적 있으면 바로 return
-        return memo[n]
+for i in range(K):#0,1,2,3,4
+    for j in range(i+1,K):#
+        if arr[i][0] < arr[j][0]:
+            cnt+=1
+    newbie.append(cnt)
+    cnt=0
 
-    memo[n] = fib_action(memo, n-1) + fib_action(memo, n-2)
-    return memo[n]
-
-N = int(sys.stdin.readline())
-print(fib(N))
+print(newbie)
