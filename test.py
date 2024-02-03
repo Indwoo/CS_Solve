@@ -1,22 +1,18 @@
 import sys
+input = sys.stdin.readline
 
-arr = []
+N = int(input())
+stairs = [0 for _ in range(301)]
+DP = [0 for _ in range(301)]
 
-K = int(sys.stdin.readline())
-newbie=[]
-cnt=0
+for i in range(N):
+    stairs[i] = int(input())
+    DP[0] = stairs[0]
+    DP[1] = max(stairs[0] + stairs[1], stairs[1])
+    DP[2] = max(stairs[0] + stairs[2], stairs[1] + stairs[2])
 
-for j in range(K):
-    arr.append(list((map(int, sys.stdin.readline().split()))))
-        
-arr.sort(key = lambda x:(x[1],x[0]))
-print(arr)
+for i in range(3, N + 1):
+    DP[i] = max(DP[i-3] + stairs[i-1] + stairs[i], DP[i-2] + stairs[i])
+    print(DP[i])
 
-for i in range(K):#0,1,2,3,4
-    for j in range(i+1,K):#
-        if arr[i][0] < arr[j][0]:
-            cnt+=1
-    newbie.append(cnt)
-    cnt=0
-
-print(newbie)
+print(DP[N-1])
