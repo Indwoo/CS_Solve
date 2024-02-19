@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int min_heap[10001] = {0,};
+int min_heap[100001] = {0,};
 int idx = 1;
 
 void insert_heap(int val)
@@ -31,11 +31,11 @@ void heapify(int i)
     int right = i * 2 + 1;
     int temp;
 
-    if (left < idx && min_heap[left] < min_heap[right])
+    if (left < idx && min_heap[left] < min_heap[parent])
     {
         parent = left;
     }
-    if (right < idx && min_heap[right] < min_heap[left])
+    if (right < idx && min_heap[right] < min_heap[parent])
     {
         parent = right;
     }
@@ -48,13 +48,14 @@ void heapify(int i)
     }
 }
 
-void main()
+int main(void)
 {
     int N;
     int temp;
     scanf("%d", &N);
     for (int i = 0; i < N; i++)
     {
+        scanf("%d", &temp);
         if (temp == 0)
         {
             if (idx == 1)
@@ -63,7 +64,7 @@ void main()
             }
             else
             {
-                printf("%d\n", min_heap[i]);
+                printf("%d\n", min_heap[1]);
                 min_heap[1] = min_heap[idx - 1];
                 heapify(1);
                 idx -= 1;
@@ -74,4 +75,5 @@ void main()
             insert_heap(temp);
         }
     }
+    return 0;
 }
