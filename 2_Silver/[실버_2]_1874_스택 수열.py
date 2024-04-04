@@ -8,9 +8,9 @@ rsp = 0
 
 for i in range(N):
     stk_list.append(int(sys.stdin.readline().rstrip()))
-i = 0
-while True:
-    i += 1
+
+for i in range(1, N+1):
+
     if i <= stk_list[rsp]:
         is_stack.append(i)
         answer.append("+")
@@ -19,8 +19,7 @@ while True:
         is_stack.pop()
         rsp+=1
         answer.append("-")
-    if i == N:
-        break    
+
 if len(answer) == N*2:
     for i in answer:
         print(i , end="\n")
