@@ -1,6 +1,6 @@
 n = str(input())
 m = n.split('-')
-print(m)
+
 answer = 0
 x = sum(map(int, (m[0].split('+'))))
 if n[0] == '-':
