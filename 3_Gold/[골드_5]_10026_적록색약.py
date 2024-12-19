@@ -16,17 +16,17 @@ def BFS(x,y):
             nx = x + dx[d]
             ny = y + dy[d]
             if 0<=nx<N and 0<=ny<N and a[nx][ny] == a[x][y] and not visited[nx][ny]:
+                visited[nx][ny] = 1
                 q.append((nx,ny))
 
 
-
 visited = [[0] * N for _ in range(N)]
-cnt1 = 0
+rg_visible = 0
 for i in range(N):
     for j in range(N):
         if not visited[i][j]:
             BFS(i,j)
-            cnt1 += 1
+            rg_visible += 1
 
 for i in range(N):
     for j in range(N):
@@ -34,11 +34,11 @@ for i in range(N):
             a[i][j] = 'R'
 
 visited = [[0] * N for _ in range(N)]
-cnt2 = 0
+rb_blind = 0
 for i in range(N):
     for j in range(N):
         if not visited[i][j]:
             BFS(i,j)
-            cnt2 += 1
+            rb_blind += 1
 
-print(cnt1, cnt2)
+rg_print(visible, rb_blind)
