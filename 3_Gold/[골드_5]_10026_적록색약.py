@@ -1,10 +1,5 @@
 from collections import deque
 
-
-N = int(input())
-a = [list(input()) for _ in range(N)]
-q = deque()
-
 def BFS(x,y):
     q.append((x,y))
     dx = [-1,0,1,0]
@@ -18,6 +13,10 @@ def BFS(x,y):
             if 0<=nx<N and 0<=ny<N and a[nx][ny] == a[x][y] and not visited[nx][ny]:
                 visited[nx][ny] = 1
                 q.append((nx,ny))
+
+N = int(input())
+a = [list(input()) for _ in range(N)]
+q = deque()
 
 
 visited = [[0] * N for _ in range(N)]
@@ -41,4 +40,4 @@ for i in range(N):
             BFS(i,j)
             rb_blind += 1
 
-rg_print(visible, rb_blind)
+print(rg_visible, rb_blind)
