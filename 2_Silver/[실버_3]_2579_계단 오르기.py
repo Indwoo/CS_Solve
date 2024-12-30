@@ -1,23 +1,17 @@
 import sys
+input = sys.stdin.readline
 
-N = int(sys.stdin.readline())
-stairs = []
-max_list = []
-cnt = 0
+N = int(input())
+stairs = [0]*301
+for i in range(1, N+1):
+    stairs[i] = int(input())
 
-for i in range(N):
-    stairs.append(int(sys.stdin.readline()))
+dp = [0]*301
+dp[1] = stairs[1]
+dp[2] = stairs[1] + stairs[2]
+dp[3] = max(stairs[1] + stairs[3], stairs[2] + stairs[3])
 
-stairs = list(reversed(stairs))
-stairs.append(0)
-max_list.append(stairs[0])
-i = 0
-while (i <= len(stairs)):
-    if stairs[i+1] > stairs[i+2]:
-        max_list.append(stairs[i+1])
-        i = stairs.index(stairs[i+1])
-        print(max_list)
-    else:
-        max_list.append(stairs[i+2])
-        i = stairs.index(stairs[i+2])
-        print(max_list)
+for i in range(4, N+1):
+    dp[i] = max(dp[i-3] + stairs[i-1] + stairs[i], dp[i-2] + stairs[i])
+
+print(dp[N])
