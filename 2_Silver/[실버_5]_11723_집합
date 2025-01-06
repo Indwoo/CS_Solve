@@ -2,7 +2,7 @@ import sys
 
 input = sys.stdin.readline
 
-N = input()
+N = int(input())
 
 my_set = set()
 
@@ -10,14 +10,25 @@ for _ in range(N):
     cmnd = input().split()
     if cmnd[0] == 'add':
         my_set.add(int(cmnd[1]))
+
     elif cmnd[0] == 'remove':
-        my_set.remove(int(cmnd[1]))
+        my_set.discard(int(cmnd[1]))
+
     elif cmnd[0] == 'check':    
-        (int(arr[1]) in s) ? print(1) : print(0)
+        if int(my_set[1]) in my_set:
+            print(1)
+        else:
+            print(0)
+
     elif cmnd[0] == 'toggle':
-        (int(arr[1]) in s) ? my_set.remove(int(cmnd[1])) : my_set.add(int(cmnd[1]))
+        if int(my_set[1]) in my_set:
+            my_set.remove(int(cmnd[1]))
+        else:
+            my_set.add(int(cmnd[1]))
+
     elif cmnd[0] == 'all':
-        my_set = set([i for i in range(1,21)])
+        my_set = set(range(1,21))
+        
     else:
         my_set = set()
         
