@@ -4,4 +4,4 @@ for _ in range(T):
     x, y = a, b
     while a%b != 0:
         a,b = b, a%b
-  print(x*y//b)
+    print(x*y//b)
