@@ -6,21 +6,27 @@
     <title>Document</title>
   </head>
   <body>
-    <input id ="itemInput" type="text"></input>
-    <label id = "inputResult"></label>
+    <input id ="itemInputFirst" type="text"></input><br>
+    <input id ="itemInputSecond" type="text"></input><br>
+    <label id = "addResult"></label>
 
     <script>
-      const input = document.getElementById('itemInput');
-      const label = document.getElementById('inputResult');
+      const inputFirst = document.getElementById('itemInputFirst');
+      const inputSecond = document.getElementById('itemInputSecond');
+      const addResult = document.getElementById('addResult');
 
-      input.addEventListener('input', ()=>{
-        label.textContent = input.value;
-      });
+      function updateSum(){
+        const val1 = parseFloat(inputFirst.value);
+        const val2 = parseFloat(inputSecond.value);
 
-      function upperAlpha(arr){
-        return arr.charAt(0).toUpperCase() + arr.slice(1);
+        if(isNaN(val1) || isNaN(val2)){
+          addResult.textContent = "숫자를 입력하세요."
+        }else{
+          addResult.textContent = val1 + val2;
+        }
       }
-
+      inputFirst.addEventListener('input', updateSum);
+      inputSecond.addEventListener('input', updateSum);
     </script>
   </body>
 </html>
