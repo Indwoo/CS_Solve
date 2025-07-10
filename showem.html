@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id ="itemInput" type="text"></input>
+    <button id = "addItemBtn">추가</button>
+    <ul id = "itemList"></ul>
+
+    <script>
+      const input = document.getElementById('itemInput');
+      const button = document.getElementById('addItemBtn');
+      const list = document.getElementById('itemList');
+      const numlist = [1,2,3,4,5,6]
+
+      function evenNum (arr){
+        return arr.filter(num => num % 2 === 0);
+      }
+      const result = evenNum(numlist);
+      console.log(result);
+      
+      button.addEventListener('click', () =>{
+        const value = input.value.trim();
+        if(value != ''){
+          const li = document.createElement('li');
+          li.textContent = value;
+          list.appendChild(li);
+          input.value='';
+        }
+      })
+    </script>
+  </body>
+</html>
