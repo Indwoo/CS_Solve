@@ -7,30 +7,20 @@
   </head>
   <body>
     <input id ="itemInput" type="text"></input>
-    <button id = "addItemBtn">추가</button>
-    <ul id = "itemList"></ul>
+    <label id = "inputResult"></label>
 
     <script>
       const input = document.getElementById('itemInput');
-      const button = document.getElementById('addItemBtn');
-      const list = document.getElementById('itemList');
-      const numlist = [1,2,3,4,5,6]
+      const label = document.getElementById('inputResult');
 
-      function evenNum (arr){
-        return arr.filter(num => num % 2 === 0);
+      input.addEventListener('input', ()=>{
+        label.textContent = input.value;
+      });
+
+      function upperAlpha(arr){
+        return arr.charAt(0).toUpperCase() + arr.slice(1);
       }
-      const result = evenNum(numlist);
-      console.log(result);
-      
-      button.addEventListener('click', () =>{
-        const value = input.value.trim();
-        if(value != ''){
-          const li = document.createElement('li');
-          li.textContent = value;
-          list.appendChild(li);
-          input.value='';
-        }
-      })
+
     </script>
   </body>
 </html>
