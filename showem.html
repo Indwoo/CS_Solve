@@ -6,14 +6,30 @@
     <title>Document</title>
   </head>
   <body>
+    <input id = "inputFirst"></input>
+    <input id = "inputSecond"></input>
+    <button id = "addInput">add</button>
+    <span id = "showResult"></span>
     <script>
-      function makeUpper(arr) {
-        return arr
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ");
-      }
-      console.log(makeUpper("awr jokawnm krwn oow"));
+      const getInputFirst = document.getElementById("inputFirst");
+      const getInputSecond = document.getElementById("inputSecond");
+      const getAddInputBtn = document.getElementById("addInput");
+      const getShowResult = document.getElementById('showResult');
+
+      getAddInputBtn.addEventListener('click',()=>{
+        const floatInputFirst = parseFloat(getInputFirst.value)
+        const floatInputSecond = parseFloat(getInputSecond.value)
+
+        if(isNaN(floatInputFirst) || isNaN(floatInputSecond)){
+          getShowResult.textContent = '오류'
+        }
+        else{
+          const result = floatInputFirst + floatInputSecond
+          getShowResult.textContent = result
+        }
+      })
+
+
     </script>
   </body>
 </html>
