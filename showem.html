@@ -6,27 +6,23 @@
     <title>Document</title>
   </head>
   <body>
-    <input id ="itemInputFirst" type="text"></input><br>
-    <input id ="itemInputSecond" type="text"></input><br>
-    <label id = "addResult"></label>
-
+    <input id = 'inputValue'></input>
+    <ul id ="inputResult"></ul>
+    <button id = "addInputBtn"></button>
     <script>
-      const inputFirst = document.getElementById('itemInputFirst');
-      const inputSecond = document.getElementById('itemInputSecond');
-      const addResult = document.getElementById('addResult');
+      const getInput = document.getElementById('inputValue');
+      const getUl = document.getElementById('inputResult');
+      const getInputBtn = document.getElementById('addInputBtn');
 
-      function updateSum(){
-        const val1 = parseFloat(inputFirst.value);
-        const val2 = parseFloat(inputSecond.value);
+      getInputBtn.addEventListener('click', ()=>{
+        const inputValue = getInput.value.trim()
+        const li = document.createElement('li');
+        li.textContent = inputValue;
+        getUl.appendChild(li);
 
-        if(isNaN(val1) || isNaN(val2)){
-          addResult.textContent = "숫자를 입력하세요."
-        }else{
-          addResult.textContent = val1 + val2;
-        }
-      }
-      inputFirst.addEventListener('input', updateSum);
-      inputSecond.addEventListener('input', updateSum);
+      })
+      
+
     </script>
   </body>
 </html>
