@@ -6,30 +6,37 @@
     <title>Document</title>
   </head>
   <body>
-    <input id = "inputFirst"></input>
-    <input id = "inputSecond"></input>
-    <button id = "addInput">add</button>
-    <span id = "showResult"></span>
+    <input id = 'searchBar'></input>
+    <ul id = 'fruitList'></ul>
     <script>
-      const getInputFirst = document.getElementById("inputFirst");
-      const getInputSecond = document.getElementById("inputSecond");
-      const getAddInputBtn = document.getElementById("addInput");
-      const getShowResult = document.getElementById('showResult');
+      const fruits = ["apple", "banana", "grape", "orange", "watermelon"];
+      const searchBar = document.getElementById("searchBar");
+      const fruitList = document.getElementById("fruitList");
 
-      getAddInputBtn.addEventListener('click',()=>{
-        const floatInputFirst = parseFloat(getInputFirst.value)
-        const floatInputSecond = parseFloat(getInputSecond.value)
+      function renderFruits(items){
+        fruitList.innerHTML = '';
+        if(items.length === 0){
+          const li = document.createElement('li');
+          li.textContent = '일치하는 항목이 없습니다.';
+          fruitList.appendChild(li)
+          return;
+        }
+        items.forEach(fruit => {
+          const li = document.createElement('li');
+          li.textContent = fruit;
+          fruitList.appendChild(li);
+        });
 
-        if(isNaN(floatInputFirst) || isNaN(floatInputSecond)){
-          getShowResult.textContent = '오류'
-        }
-        else{
-          const result = floatInputFirst + floatInputSecond
-          getShowResult.textContent = result
-        }
+      }
+      renderFruits(fruits);
+
+      searchBar.addEventListener('input', ()=>{
+        const keyword = searchBar.value.toLowerCase();
+        const filtered_keword = fruits.filter(fruit =>
+          fruit.toLowerCase().startsWith(keyword)
+        );
+        renderFruits(filtered_keword)
       })
-
-
     </script>
   </body>
 </html>
