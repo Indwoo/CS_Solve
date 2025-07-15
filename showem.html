@@ -6,36 +6,30 @@
     <title>Document</title>
   </head>
   <body>
-    <input id="searchBar" />
-    <ul id="skillList"></ul>
+    <span id="btnResult"></span>
+    <button id="addBtn">+</button>
+    <button id="subBtn">-</button>
+    <button id="resetBtn">reset</button>
     <script>
-      const skills = ["HTML", "CSS", "JavaScript", "React", "Vue", "Svelte"];
-      const searchBar = document.getElementById("searchBar");
-      const skillList = document.getElementById("skillList");
+      const btnResult = document.getElementById("btnResult");
+      const addBtn = document.getElementById("addBtn");
+      const subBtn = document.getElementById("subBtn");
+      const resetBtn = document.getElementById("resetBtn");
 
-      function renderSkill(items) {
-        skillList.innerHTML = "";
-        if (items.length === 0) {
-          const li = document.createElement("li");
-          li.textContent = "일치하는 항목이 없습니다.";
-          skillList.appendChild(li);
-          return;
-        }
-        items.forEach((skill) => {
-          const li = document.createElement("li");
-          li.textContent = skill;
-          skillList.appendChild(li);
-        });
-      }
+      let result = 0;
+      btnResult.textContent = result;
 
-      renderSkill(skills);
-
-      searchBar.addEventListener("input", () => {
-        const keyword = searchBar.value.toLowerCase();
-        const filtered_keword = skills.filter((skill) =>
-          skill.toLowerCase().includes(keyword)
-        );
-        renderSkill(filtered_keword);
+      addBtn.addEventListener("click", () => {
+        result += 1;
+        btnResult.textContent = result;
+      });
+      subBtn.addEventListener("click", () => {
+        result -= 1;
+        btnResult.textContent = result;
+      });
+      resetBtn.addEventListener("click", () => {
+        result = 0;
+        btnResult.textContent = result;
       });
     </script>
   </body>
