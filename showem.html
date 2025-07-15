@@ -4,32 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      #my_modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+      #my_modal.show {
+        display: flex;
+      }
+    </style>
   </head>
   <body>
-    <span id="btnResult"></span>
-    <button id="addBtn">+</button>
-    <button id="subBtn">-</button>
-    <button id="resetBtn">reset</button>
+    <button id="modalOpenBtn">모달창 열기</button>
+    <div id="my_modal">
+      모달창
+      <button id="modalCloseBtn">모달 닫기</button>
+    </div>
     <script>
-      const btnResult = document.getElementById("btnResult");
-      const addBtn = document.getElementById("addBtn");
-      const subBtn = document.getElementById("subBtn");
-      const resetBtn = document.getElementById("resetBtn");
+      const modalOpenBtn = document.getElementById("modalOpenBtn");
+      const modalCloseBtn = document.getElementById("modalCloseBtn");
+      const my_modal = document.getElementById("my_modal");
 
-      let result = 0;
-      btnResult.textContent = result;
+      modalOpenBtn.addEventListener("click", () => {
+        my_modal.classList.add("show");
+      });
 
-      addBtn.addEventListener("click", () => {
-        result += 1;
-        btnResult.textContent = result;
+      modalCloseBtn.addEventListener("click", () => {
+        my_modal.classList.remove("show");
       });
-      subBtn.addEventListener("click", () => {
-        result -= 1;
-        btnResult.textContent = result;
-      });
-      resetBtn.addEventListener("click", () => {
-        result = 0;
-        btnResult.textContent = result;
+
+      my_modal.addEventListener("click", (e) => {
+        if (e.target === my_modal) {
+          my_modal.classList.remove("show");
+        }
       });
     </script>
   </body>
