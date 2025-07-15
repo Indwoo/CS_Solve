@@ -6,37 +6,37 @@
     <title>Document</title>
   </head>
   <body>
-    <input id = 'searchBar'></input>
-    <ul id = 'fruitList'></ul>
+    <input id="searchBar" />
+    <ul id="skillList"></ul>
     <script>
-      const fruits = ["apple", "banana", "grape", "orange", "watermelon"];
+      const skills = ["HTML", "CSS", "JavaScript", "React", "Vue", "Svelte"];
       const searchBar = document.getElementById("searchBar");
-      const fruitList = document.getElementById("fruitList");
+      const skillList = document.getElementById("skillList");
 
-      function renderFruits(items){
-        fruitList.innerHTML = '';
-        if(items.length === 0){
-          const li = document.createElement('li');
-          li.textContent = '일치하는 항목이 없습니다.';
-          fruitList.appendChild(li)
+      function renderSkill(items) {
+        skillList.innerHTML = "";
+        if (items.length === 0) {
+          const li = document.createElement("li");
+          li.textContent = "일치하는 항목이 없습니다.";
+          skillList.appendChild(li);
           return;
         }
-        items.forEach(fruit => {
-          const li = document.createElement('li');
-          li.textContent = fruit;
-          fruitList.appendChild(li);
+        items.forEach((skill) => {
+          const li = document.createElement("li");
+          li.textContent = skill;
+          skillList.appendChild(li);
         });
-
       }
-      renderFruits(fruits);
 
-      searchBar.addEventListener('input', ()=>{
+      renderSkill(skills);
+
+      searchBar.addEventListener("input", () => {
         const keyword = searchBar.value.toLowerCase();
-        const filtered_keword = fruits.filter(fruit =>
-          fruit.toLowerCase().startsWith(keyword)
+        const filtered_keword = skills.filter((skill) =>
+          skill.toLowerCase().includes(keyword)
         );
-        renderFruits(filtered_keword)
-      })
+        renderSkill(filtered_keword);
+      });
     </script>
   </body>
 </html>
